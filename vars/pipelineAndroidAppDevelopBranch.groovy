@@ -11,6 +11,7 @@ def call(Closure body={}) {
         agent none
 
         options {
+	    timeout(time: 1, unit: 'HOURS')
             skipDefaultCheckout()
         }
 
