@@ -1,14 +1,14 @@
 #!/usr/bin/env groovy
 
 library(
-    identifier: 'github.com:Taki-Kun/JenkinsSharedLibraries@master',
+    identifier: 'github.com:BruceLEO1969/JenkinsSharedLibraries@master',
     changelog: false,
     retriever: modernSCM(
         [
             $class: 'GitSCMSource',
             credentialsId: '846a4a04-da8e-4909-a5ff-eef9004b1eef',
             id: '1be36020-7d8e-40a0-99dc-113f2b036c28',
-            remote: 'git@github.com:Taki-Kun/JenkinsSharedLibraries.git',
+            remote: 'git@github.com:BruceLEO1969/JenkinsSharedLibraries.git',
             traits: [
                 [
                     $class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait'
