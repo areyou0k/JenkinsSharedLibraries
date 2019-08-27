@@ -77,7 +77,7 @@ def call(Closure body={}) {
                             stage('Checkout SCM - china flavor') {
                                 agent {
                                     node {
-                                        label 'mac-mini1'
+                                        label 'archons'
                                         customWorkspace "workspace/${JOB_NAME}"
                                     }
                                 }
@@ -95,7 +95,7 @@ def call(Closure body={}) {
                             stage('Prepare - china flavor') {
                                 agent {
                                     node {
-                                        label 'mac-mini1'
+                                        label 'archons'
                                         customWorkspace "workspace/${JOB_NAME}"
                                     }
                                 }
@@ -115,7 +115,7 @@ def call(Closure body={}) {
                             stage('clean - china flavor') {
                                 agent {
                                     node {
-                                        label 'mac-mini1'
+                                        label 'archons'
                                         customWorkspace "workspace/${JOB_NAME}"
                                     }
                                 }
@@ -135,7 +135,7 @@ def call(Closure body={}) {
                             stage('Unit Testing - china flavor') {
                                 agent {
                                     node {
-                                        label 'mac-mini1'
+                                        label 'archons'
                                         customWorkspace "workspace/${JOB_NAME}"
                                     }
                                 }
@@ -158,7 +158,7 @@ def call(Closure body={}) {
                             stage('Build - china flavor') {
                                 agent {
                                     node {
-                                        label 'mac-mini1'
+                                        label 'archons'
                                         customWorkspace "workspace/${JOB_NAME}"
                                     }
                                 }
@@ -177,7 +177,7 @@ def call(Closure body={}) {
                             /*stage('Artifacts - china flavor') {
                                 agent {
                                     node {
-                                        label 'mac-mini1'
+                                        label 'archons'
                                         customWorkspace "workspace/${JOB_NAME}"
                                     }
                                 }
@@ -203,7 +203,7 @@ def call(Closure body={}) {
                             stage('Testing - china flavor') {
                                 agent {
                                     node {
-                                        label 'mac-mini1'
+                                        label 'archons'
                                         customWorkspace "workspace/${JOB_NAME}"
                                     }
                                 }
