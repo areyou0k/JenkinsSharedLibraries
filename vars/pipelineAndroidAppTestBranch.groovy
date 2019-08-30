@@ -52,7 +52,7 @@ def call(Closure body={}) {
             stage('Checkout SCM') {
                 agent {
                     node {
-                        label 'archons'
+                        label 'mac-mini1'
                         customWorkspace "workspace/${JOB_NAME}"
                     }
                 }
@@ -70,7 +70,7 @@ def call(Closure body={}) {
             stage('Unit Testing') {
                 agent {
                     node {
-                        label 'archons'
+                        label 'mac-mini1'
                         customWorkspace "workspace/${JOB_NAME}"
                     }
                 }
@@ -91,7 +91,7 @@ def call(Closure body={}) {
             stage('Build') {
                 agent {
                     node {
-                        label 'archons'
+                        label 'mac-mini1'
                         customWorkspace "workspace/${JOB_NAME}"
                     }
                 }
