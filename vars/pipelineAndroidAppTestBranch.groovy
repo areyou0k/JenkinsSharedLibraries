@@ -52,7 +52,7 @@ def call(Closure body={}) {
             stage('Checkout SCM') {
                 agent {
                     node {
-                        label 'mac-mini1'
+                        label 'archons'
                         customWorkspace "workspace/${JOB_NAME}"
                     }
                 }
@@ -70,7 +70,7 @@ def call(Closure body={}) {
             stage('Unit Testing') {
                 agent {
                     node {
-                        label 'mac-mini1'
+                        label 'archons'
                         customWorkspace "workspace/${JOB_NAME}"
                     }
                 }
@@ -91,13 +91,13 @@ def call(Closure body={}) {
             stage('Build') {
                 agent {
                     node {
-                        label 'mac-mini1'
+                        label 'archons'
                         customWorkspace "workspace/${JOB_NAME}"
                     }
                 }
                 environment {
-                    ANDROID_SDK_ROOT = "${HOME}/Library/Android/sdk"
-                    // ANDROID_SDK_ROOT = "/usr/local/Caskroom/android-sdk/4333796"
+                    // ANDROID_SDK_ROOT = "${HOME}/Library/Android/sdk"
+                    ANDROID_SDK_ROOT = "/usr/local/Caskroom/android-sdk/4333796"
                     ANDROID_HOME = "${ANDROID_SDK_ROOT}"
                     PATH = "/Users/mac/.rbenv/shims:/usr/local/bin:${PATH}"
                 }
