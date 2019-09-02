@@ -109,6 +109,9 @@ def call(Closure body={}) {
 def buildDeveopBranch() {
     echo "env previous: ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT}"
     echo "env GIT_COMMIT: ${env.GIT_COMMIT}"
+    sh '''
+    git log --pretty="> %s%n" ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT}..${env.GIT_COMMIT} --no-merges
+    '''
     echo "Develop branch - Build"
     sh 'bundle install'
     sh 'bundle exec fastlane ios do_publish_all'
