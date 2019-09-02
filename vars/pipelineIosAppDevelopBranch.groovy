@@ -112,7 +112,8 @@ def buildDeveopBranch() {
     sh '''
     export commit_log=$(git log --pretty="> %s%n" acdfe33f4...3002d0938 --no-merges)
     '''
-    echo "${commit_log}"
+    echo "WTF"
+    echo "${env.commit_log}"
     echo "Develop branch - Build"
     sh 'echo ${commit_log}'
     sh 'bundle install'
