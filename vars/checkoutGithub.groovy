@@ -15,7 +15,7 @@ def call() {
                 honorRefspec: true,
                 noTags: false,
                 reference: '',
-                shallow: true,
+                //shallow: true,
                 timeout: 30
             ],
             [
