@@ -51,7 +51,7 @@ def call(Closure body={}) {
             stage('Checkout SCM') {
                 agent {
                     node {
-                        label 'archons'
+                        label 'imac'
                         customWorkspace "workspace/${JOB_NAME.replace('%2F', '/')}"
                     }
                 }
@@ -69,7 +69,7 @@ def call(Closure body={}) {
             stage('Build') {
                 agent {
                     node {
-                        label 'archons'
+                        label 'imac'
                         customWorkspace "workspace/${JOB_NAME.replace('%2F', '/')}"
                     }
                 }
