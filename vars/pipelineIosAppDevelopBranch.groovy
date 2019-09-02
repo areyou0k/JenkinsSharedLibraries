@@ -64,7 +64,7 @@ def call(Closure body={}) {
                         def scmVars = checkoutGitlab()
                             echo "branch: ${scmVars.BRANCH_NAME}"
                             echo "current SHA: ${scmVars.GIT_COMMIT}"
-                            echo "previous SHA: ${GIT_PREVIOUS_SUCCESSFUL_COMMIT}"
+                            echo "previous SHA: ${scmVars.GIT_PREVIOUS_SUCCESSFUL_COMMIT}"
                     }
                 }
             }
