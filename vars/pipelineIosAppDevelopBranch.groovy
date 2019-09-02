@@ -62,8 +62,10 @@ def call(Closure body={}) {
                 steps {
                     script {
                         def scmVars = checkoutGitlab()
-                            echo "current SHA: ${scmVars.GIT_COMMIT}"
-                            echo "previous SHA: ${scmVars.GIT_PREVIOUS_SUCCESSFUL_COMMIT}"
+                        env.GIT_COMMIT = ${scmVars.GIT_COMMIT}
+                        env.GIT_PREVIOUS_SUCCESSFUL_COMMIT = ${scmVars.GIT_PREVIOUS_SUCCESSFUL_COMMIT}
+                        echo "current SHA: ${scmVars.GIT_COMMIT}"
+                        echo "previous SHA: ${scmVars.GIT_PREVIOUS_SUCCESSFUL_COMMIT}"
                     }
                 }
             }
@@ -105,8 +107,8 @@ def call(Closure body={}) {
 }
 
 def buildDeveopBranch() {
-    echo "${scmVars.GIT_PREVIOUS_SUCCESSFUL_COMMIT}"
-    echo "${scmVars.GIT_COMMIT}"
+    echo "env previous: ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT}"
+    echo "env GIT_COMMIT: ${env.GIT_COMMIT}"
     sh "echo ${scmVars.GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${scmVars.GIT_COMMIT}"
     echo "Develop branch - Build"
     sh 'bundle install'
