@@ -11,7 +11,7 @@ def call() {
             [
                 $class: 'CloneOption',
                 // depth: 2147483647,
-                // depth: 10000,
+                depth: 100,
                 honorRefspec: true,
                 noTags: false,
                 reference: '',
