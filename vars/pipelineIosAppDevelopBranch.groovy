@@ -103,6 +103,8 @@ def call(Closure body={}) {
 }
 
 def buildDeveopBranch() {
+    def since = System.getenv('GIT_PREVIOUS_SUCCESSFUL_COMMIT')
+    println "Getting changes from git using ${since}"
     echo "${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT}"
     echo "${env.GIT_COMMIT}"
     sh "echo ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${env.GIT_COMMIT}"
