@@ -103,8 +103,8 @@ def call(Closure body={}) {
 }
 
 def buildDeveopBranch() {
-    echo ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT}
-    echo ${env.GIT_COMMIT}
+    echo "${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT}"
+    echo "${env.GIT_COMMIT}"
     sh "echo ${GIT_PREVIOUS_SUCCESSFUL_COMMIT} ${GIT_COMMIT}"
     echo "Develop branch - Build"
     sh 'bundle install'
