@@ -114,6 +114,7 @@ def buildDeveopBranch() {
     '''
     echo "${commit_log}"
     echo "Develop branch - Build"
+    sh 'echo ${commit_log}'
     sh 'bundle install'
     sh 'bundle exec fastlane ios do_publish_all'
 }
