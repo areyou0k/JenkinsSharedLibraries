@@ -110,7 +110,7 @@ def buildDeveopBranch() {
     echo "env previous: ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT}"
     echo "env GIT_COMMIT: ${env.GIT_COMMIT}"
     sh '''
-    commit_log=$(git log --pretty="> %s%n" acdfe33f4...3002d0938 --no-merges)
+    export commit_log=$(git log --pretty="> %s%n" acdfe33f4...3002d0938 --no-merges)
     '''
     echo "${commit_log}"
     echo "Develop branch - Build"
