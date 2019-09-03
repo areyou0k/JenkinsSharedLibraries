@@ -141,7 +141,7 @@ def call(Closure body={}) {
                 steps {
                     sh '''
                     git add config.gradle
-                    git commint -m "Increase versionCode automatically."
+                    git commit -m "Increase versionCode automatically."
                     git push
                     '''
                 }
