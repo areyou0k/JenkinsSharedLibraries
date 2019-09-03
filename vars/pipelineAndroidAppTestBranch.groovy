@@ -142,7 +142,7 @@ def call(Closure body={}) {
                     sh '''
                     git add config.gradle
                     git commit -m "Increase versionCode automatically."
-                    git push
+                    git push --set-upstream origin $(git branch | awk '{print $2}')
                     '''
                 }
             }
