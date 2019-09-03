@@ -129,7 +129,7 @@ def call(Closure body={}) {
                 }
             }
 
-            stage("Incerease version code") {
+            stage("Wechat notify all") {
                 when {
                     expression {
                         currentBuild.result == null || currentBuild.result == 'SUCCESS' 
