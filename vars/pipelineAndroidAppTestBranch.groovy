@@ -88,30 +88,7 @@ def call(Closure body={}) {
                 }
             }
 
-            stage('Build') {
-                agent {
-                    node {
-                        label 'archons'
-                        customWorkspace "workspace/${JOB_NAME}"
-                    }
-                }
-                environment {
-                    // ANDROID_SDK_ROOT = "${HOME}/Library/Android/sdk"
-                    ANDROID_SDK_ROOT = "/usr/local/Caskroom/android-sdk/4333796"
-                    ANDROID_HOME = "${ANDROID_SDK_ROOT}"
-                    PATH = "/Users/mac/.rbenv/shims:/usr/local/bin:${PATH}"
-                }
-                steps {
-                    buildTestBranch()
-                }
-            }
-
             stage("Incerease version code") {
-                when {
-                    expression {
-                        currentBuild.result == null || currentBuild.result == 'SUCCESS' 
-                    }
-                }
                 agent {
                     node {
                         label 'archons'
@@ -131,12 +108,7 @@ def call(Closure body={}) {
                 }
             }
 
-            stage("Wechat notify all") {
-                when {
-                    expression {
-                        currentBuild.result == null || currentBuild.result == 'SUCCESS' 
-                    }
-                }
+            stage('Build') {
                 agent {
                     node {
                         label 'archons'
@@ -150,9 +122,47 @@ def call(Closure body={}) {
                     PATH = "/Users/mac/.rbenv/shims:/usr/local/bin:${PATH}"
                 }
                 steps {
-                    wechatAll()
+                    buildTestBranch()
                 }
             }
+
+            stage("Git commit") {
+                when {
+                    expression {
+                        currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+                    }
+                }
+                agent {
+                    node {
+                        label 'archons'
+                        customWorkspace "workspace/${JOB_NAME}"
+                    }
+                }
+                steps {
+                    sh '''
+                    git add config.gradle
+                    git commint -m "Increase versionCode automatically."
+                    git push
+                    '''
+                }
+            }
+
+            //stage("Wechat notify all") {
+            //    when {
+            //        expression {
+            //            currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+            //        }
+            //    }
+            //    agent {
+            //        node {
+            //            label 'archons'
+            //            customWorkspace "workspace/${JOB_NAME}"
+            //        }
+            //    }
+            //    steps {
+            //        wechatAll()
+            //    }
+            //}
         }
     }
 }
