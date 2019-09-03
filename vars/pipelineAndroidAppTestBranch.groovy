@@ -125,7 +125,9 @@ def call(Closure body={}) {
                     PATH = "/Users/mac/.rbenv/shims:/usr/local/bin:${PATH}"
                 }
                 steps {
-                    increaseVersionCode()
+                    sh '''
+                    export version_code=$(awk '/versionCode/ {print $NF}' config.gradle | cut -d ',' -f 1); sed  -i'' -e "s/versionCode      : ${version_code}/versionCode      : $[${version_code}+1]/g" config.gradle
+                    '''
                 }
             }
 
@@ -172,10 +174,6 @@ def buildTestBranch() {
     sh 'bundle install'
     // sh 'bundle update'
     sh 'bundle exec fastlane android do_publish_all'
-}
-
-def increaseVersionCode() {
-    sh 'bundle exec fastlane android do_increase_version_code'
 }
 
 def wechatAll() {
