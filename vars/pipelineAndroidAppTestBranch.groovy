@@ -105,6 +105,52 @@ def call(Closure body={}) {
                     buildTestBranch()
                 }
             }
+
+            stage("Incerease version code") {
+                when {
+                    expression {
+                        currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+                    }
+                }
+                agent {
+                    node {
+                        label 'archons'
+                        customWorkspace "workspace/${JOB_NAME}"
+                    }
+                }
+                environment {
+                    // ANDROID_SDK_ROOT = "${HOME}/Library/Android/sdk"
+                    ANDROID_SDK_ROOT = "/usr/local/Caskroom/android-sdk/4333796"
+                    ANDROID_HOME = "${ANDROID_SDK_ROOT}"
+                    PATH = "/Users/mac/.rbenv/shims:/usr/local/bin:${PATH}"
+                }
+                steps {
+                    increaseVersionCode()
+                }
+            }
+
+            stage("Incerease version code") {
+                when {
+                    expression {
+                        currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+                    }
+                }
+                agent {
+                    node {
+                        label 'archons'
+                        customWorkspace "workspace/${JOB_NAME}"
+                    }
+                }
+                environment {
+                    // ANDROID_SDK_ROOT = "${HOME}/Library/Android/sdk"
+                    ANDROID_SDK_ROOT = "/usr/local/Caskroom/android-sdk/4333796"
+                    ANDROID_HOME = "${ANDROID_SDK_ROOT}"
+                    PATH = "/Users/mac/.rbenv/shims:/usr/local/bin:${PATH}"
+                }
+                steps {
+                    wechatAll()
+                }
+            }
         }
     }
 }
@@ -126,6 +172,14 @@ def buildTestBranch() {
     sh 'bundle install'
     // sh 'bundle update'
     sh 'bundle exec fastlane android do_publish_all'
+}
+
+def increaseVersionCode() {
+    sh 'bundle exec fastlane android do_increase_version_code'
+}
+
+def wechatAll() {
+    sh 'bundle exec fastlane android do_wechat_all'
 }
 
 def artifactsTestBranch(String buildTypes = '', String productFlavors = '') {
