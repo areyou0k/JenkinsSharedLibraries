@@ -142,7 +142,9 @@ def call(Closure body={}) {
                     sh '''
                     git add config.gradle
                     git commit -m "Increase versionCode automatically."
-                    git push --set-upstream origin $(git branch | awk '{print $2}')
+                    git remote add Bitbucket ssh://git@git.hellotalk8.com:7999/android/ht_android.git
+                    git pull Bitbucket $(git branch | awk '{print $2}')
+                    git push --set-upstream Bitbucket $(git branch | awk '{print $2}')
                     '''
                 }
             }
