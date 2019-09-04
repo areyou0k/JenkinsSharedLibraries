@@ -16,9 +16,9 @@ def call(Closure body={}) {
             retry(3)
         }
 
-        triggers {
-            pollSCM('H * * * *')
-        }
+        //triggers {
+        //    pollSCM('H * * * *')
+        //}
 
         environment {
             LANG = "C.UTF-8"
