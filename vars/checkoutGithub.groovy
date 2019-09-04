@@ -10,13 +10,11 @@ def call() {
         extensions: scm.extensions + [
             [
                 $class: 'CloneOption',
-                // depth: 2147483647,
                 depth: 100,
                 honorRefspec: true,
                 noTags: false,
                 reference: '',
-                //shallow: true,
-                timeout: 30
+                timeout: 180
             ],
             [
                 $class: 'LocalBranch',

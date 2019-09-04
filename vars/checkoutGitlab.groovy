@@ -14,8 +14,7 @@ def call() {
                 honorRefspec: true,
                 noTags: false,
                 reference: '',
-                //shallow: true,
-                timeout: 30
+                timeout: 180
             ],
             [
                 $class: 'LocalBranch',
