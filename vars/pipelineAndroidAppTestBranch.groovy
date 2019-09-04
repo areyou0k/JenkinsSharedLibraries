@@ -34,7 +34,7 @@ def call(Closure body={}) {
                 agent {
                     node {
                         label 'master'
-                        customWorkspace "workspace/${JOB_NAME}"
+                        customWorkspace "workspace/test_dev"
                     }
                 }
                 when {
@@ -54,7 +54,7 @@ def call(Closure body={}) {
                 agent {
                     node {
                         label 'mac-mini1'
-                        customWorkspace "workspace/${JOB_NAME}"
+                        customWorkspace "workspace/test_dev"
                     }
                 }
                 when {
@@ -72,7 +72,7 @@ def call(Closure body={}) {
                 agent {
                     node {
                         label 'mac-mini1'
-                        customWorkspace "workspace/${JOB_NAME}"
+                        customWorkspace "workspace/test_dev"
                     }
                 }
                 environment {
@@ -93,7 +93,7 @@ def call(Closure body={}) {
                 agent {
                     node {
                         label 'mac-mini1'
-                        customWorkspace "workspace/${JOB_NAME}"
+                        customWorkspace "workspace/test_dev"
                     }
                 }
                 environment {
@@ -113,7 +113,7 @@ def call(Closure body={}) {
                 agent {
                     node {
                         label 'mac-mini1'
-                        customWorkspace "workspace/${JOB_NAME}"
+                        customWorkspace "workspace/test_dev"
                     }
                 }
                 environment {
@@ -136,7 +136,7 @@ def call(Closure body={}) {
                 agent {
                     node {
                         label 'mac-mini1'
-                        customWorkspace "workspace/${JOB_NAME}"
+                        customWorkspace "workspace/test_dev"
                     }
                 }
                 steps {
