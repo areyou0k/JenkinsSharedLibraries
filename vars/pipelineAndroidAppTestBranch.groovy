@@ -109,7 +109,49 @@ def call(Closure body={}) {
                 }
             }
 
-            stage('Build') {
+            stage('Build China') {
+                agent {
+                    node {
+                        label 'mac-mini1'
+                        customWorkspace "workspace/test_dev"
+                    }
+                }
+                environment {
+                    ANDROID_SDK_ROOT = "${HOME}/Library/Android/sdk"
+                    //ANDROID_SDK_ROOT = "/usr/local/Caskroom/android-sdk/4333796"
+                    ANDROID_HOME = "${ANDROID_SDK_ROOT}"
+                    PATH = "/Users/mac/.rbenv/shims:/usr/local/bin:${PATH}"
+                }
+                steps {
+                    sh '''
+                    ./gradlew -v
+                    ./gradlew clean 
+                    ./gradlew assembleChinaRelease
+                    '''
+                }
+            }
+
+            stage('Build Google') {
+                agent {
+                    node {
+                        label 'mac-mini1'
+                        customWorkspace "workspace/test_dev"
+                    }
+                }
+                environment {
+                    ANDROID_SDK_ROOT = "${HOME}/Library/Android/sdk"
+                    //ANDROID_SDK_ROOT = "/usr/local/Caskroom/android-sdk/4333796"
+                    ANDROID_HOME = "${ANDROID_SDK_ROOT}"
+                    PATH = "/Users/mac/.rbenv/shims:/usr/local/bin:${PATH}"
+                }
+                steps {
+                    sh '''
+                    ./gradlew assembleGoogleRelease
+                    '''
+                }
+            }
+
+            stage('UPload') {
                 agent {
                     node {
                         label 'mac-mini1'
