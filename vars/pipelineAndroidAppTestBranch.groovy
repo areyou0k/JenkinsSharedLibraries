@@ -104,7 +104,7 @@ def call(Closure body={}) {
                 }
                 steps {
                     sh '''
-                    curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
+                    curl -s 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
                         -H 'Content-Type: application/json' \
                         -d '
                             {
@@ -141,13 +141,13 @@ def call(Closure body={}) {
                     ./gradlew assembleChinaRelease
                     '''
                     sh '''
-                    curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
+                    curl -s 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
                         -H 'Content-Type: application/json' \
                         -d '
                             {
                                 "msgtype": "markdown",
                                 "markdown": {
-                                    "content": "Gradle task for China <font color=\"info\">success</font>.."
+                                    "content": "Gradle task for China **success**.."
                                 }
                             }'
                     '''
@@ -172,13 +172,13 @@ def call(Closure body={}) {
                     ./gradlew assembleGoogleRelease
                     '''
                     sh '''
-                    curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
+                    curl -s 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
                         -H 'Content-Type: application/json' \
                         -d '
                             {
                                 "msgtype": "markdown",
                                 "markdown": {
-                                    "content": "Gradle task for Google <font color=\"info\">success</font>."
+                                    "content": "Gradle task for Google **success**."
                                 }
                             }'
                     '''
@@ -232,13 +232,13 @@ def call(Closure body={}) {
         post {
             failure {
                 sh '''
-                curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
+                curl -s 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
                     -H 'Content-Type: application/json' \
                     -d '
                         {
                             "msgtype": "markdown",
                             "markdown": {
-                                "content": "Jenkins task <font color=\"warning\">failed</font>..."
+                                "content": "Jenkins task **failed**..."
                             }
                         }'
                 '''
