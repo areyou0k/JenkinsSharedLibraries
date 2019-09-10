@@ -104,6 +104,17 @@ def call(Closure body={}) {
                 }
                 steps {
                     sh '''
+                    curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=59122387-2ec3-4cad-932e-0979efa71f89' \
+                       -H 'Content-Type: application/json' \
+                       -d '
+                           {
+                                "msgtype": "text",
+                                "text": {
+                                    "content": "Build start..."
+                                }
+                           }'
+                    '''
+                    sh '''
                     export version_code=$(awk '/versionCode/ {print $NF}' config.gradle | cut -d ',' -f 1); sed  -i'' -e "s/versionCode      : ${version_code}/versionCode      : $[${version_code}+1]/g" config.gradle
                     '''
                 }
@@ -123,10 +134,22 @@ def call(Closure body={}) {
                     PATH = "/Users/mac/.rbenv/shims:/usr/local/bin:${PATH}"
                 }
                 steps {
+
                     sh '''
                     ./gradlew -v
                     ./gradlew clean 
                     ./gradlew assembleChinaRelease
+                    '''
+                    sh '''
+                    curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=59122387-2ec3-4cad-932e-0979efa71f89' \
+                       -H 'Content-Type: application/json' \
+                       -d '
+                           {
+                                "msgtype": "text",
+                                "text": {
+                                    "content": "Gradle task for China success."
+                                }
+                           }'
                     '''
                 }
             }
@@ -147,6 +170,17 @@ def call(Closure body={}) {
                 steps {
                     sh '''
                     ./gradlew assembleGoogleRelease
+                    '''
+                    sh '''
+                    curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=59122387-2ec3-4cad-932e-0979efa71f89' \
+                       -H 'Content-Type: application/json' \
+                       -d '
+                           {
+                                "msgtype": "text",
+                                "text": {
+                                    "content": "Gradle task for Google success."
+                                }
+                           }'
                     '''
                 }
             }
@@ -195,22 +229,20 @@ def call(Closure body={}) {
                 }
             }
 
-            //stage("Wechat notify all") {
-            //    when {
-            //        expression {
-            //            currentBuild.result == null || currentBuild.result == 'SUCCESS' 
-            //        }
-            //    }
-            //    agent {
-            //        node {
-            //            label 'mac-mini1'
-            //            customWorkspace "workspace/${JOB_NAME}"
-            //        }
-            //    }
-            //    steps {
-            //        wechatAll()
-            //    }
-            //}
+        post {
+            failure {
+                sh '''
+                    curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=59122387-2ec3-4cad-932e-0979efa71f89' \
+                       -H 'Content-Type: application/json' \
+                       -d '
+                           {
+                                "msgtype": "text",
+                                "text": {
+                                    "content": "Jenkins task failed..."
+                                }
+                           }'
+                    '''
+            }
         }
     }
 }
