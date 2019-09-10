@@ -104,15 +104,15 @@ def call(Closure body={}) {
                 }
                 steps {
                     sh '''
-                    curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=59122387-2ec3-4cad-932e-0979efa71f89' \
-                       -H 'Content-Type: application/json' \
-                       -d '
-                           {
-                                "msgtype": "text",
-                                "text": {
-                                    "content": "Build start..."
+                    curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
+                        -H 'Content-Type: application/json' \
+                        -d '
+                            {
+                                "msgtype": "markdown",
+                                "markdown": {
+                                    "content": "**A new build start...**"
                                 }
-                           }'
+                            }'
                     '''
                     sh '''
                     export version_code=$(awk '/versionCode/ {print $NF}' config.gradle | cut -d ',' -f 1); sed  -i'' -e "s/versionCode      : ${version_code}/versionCode      : $[${version_code}+1]/g" config.gradle
@@ -141,15 +141,15 @@ def call(Closure body={}) {
                     ./gradlew assembleChinaRelease
                     '''
                     sh '''
-                    curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=59122387-2ec3-4cad-932e-0979efa71f89' \
-                       -H 'Content-Type: application/json' \
-                       -d '
-                           {
-                                "msgtype": "text",
-                                "text": {
-                                    "content": "Gradle task for China success."
+                    curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
+                        -H 'Content-Type: application/json' \
+                        -d '
+                            {
+                                "msgtype": "markdown",
+                                "markdown": {
+                                    "content": "Gradle task for China <font color=\"info\">success</font>.."
                                 }
-                           }'
+                            }'
                     '''
                 }
             }
@@ -172,15 +172,15 @@ def call(Closure body={}) {
                     ./gradlew assembleGoogleRelease
                     '''
                     sh '''
-                    curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=59122387-2ec3-4cad-932e-0979efa71f89' \
-                       -H 'Content-Type: application/json' \
-                       -d '
-                           {
-                                "msgtype": "text",
-                                "text": {
-                                    "content": "Gradle task for Google success."
+                    curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
+                        -H 'Content-Type: application/json' \
+                        -d '
+                            {
+                                "msgtype": "markdown",
+                                "markdown": {
+                                    "content": "Gradle task for Google <font color=\"info\">success</font>."
                                 }
-                           }'
+                            }'
                     '''
                 }
             }
@@ -232,16 +232,16 @@ def call(Closure body={}) {
         post {
             failure {
                 sh '''
-                    curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=59122387-2ec3-4cad-932e-0979efa71f89' \
-                       -H 'Content-Type: application/json' \
-                       -d '
-                           {
-                                "msgtype": "text",
-                                "text": {
-                                    "content": "Jenkins task failed..."
-                                }
-                           }'
-                    '''
+                curl 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
+                    -H 'Content-Type: application/json' \
+                    -d '
+                        {
+                            "msgtype": "markdown",
+                            "markdown": {
+                                "content": "Jenkins task <font color=\"warning\">failed</font>..."
+                            }
+                        }'
+                '''
             }
         }
     }
