@@ -228,7 +228,7 @@ def call(Closure body={}) {
                     '''
                 }
             }
-
+        }
         post {
             failure {
                 sh '''
@@ -245,7 +245,6 @@ def call(Closure body={}) {
             }
         }
     }
-}
 }
 
 def unittestTestBranch(String buildTypes='', String productFlavors='') {
