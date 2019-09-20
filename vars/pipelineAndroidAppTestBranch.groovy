@@ -135,12 +135,11 @@ def call(Closure body={}) {
                 }
                 steps {
 
-                    // sh '''
-                    // ./gradlew -v
-                    // ./gradlew clean 
-                    // ./gradlew assembleChinaRelease
-                    // '''
-                    sh './gradlew -v'
+                    sh '''
+                    ./gradlew -v
+                    ./gradlew clean 
+                    ./gradlew assembleChinaRelease
+                    '''
                     sh '''
                     curl -s 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
                         -H 'Content-Type: application/json' \
@@ -169,10 +168,9 @@ def call(Closure body={}) {
                     PATH = "/Users/mac/.rbenv/shims:/usr/local/bin:${PATH}"
                 }
                 steps {
-                    // sh '''
-                    // ./gradlew assembleGoogleRelease
-                    // '''
-                    //sh './gradlew -v'
+                    sh '''
+                    ./gradlew assembleGoogleRelease
+                    '''
                     sh '''
                     curl -s 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
                         -H 'Content-Type: application/json' \
@@ -205,31 +203,31 @@ def call(Closure body={}) {
                 }
             }
 
-            // stage("Git commit") {
-            //     when {
-            //         expression {
-            //             currentBuild.result == null || currentBuild.result == 'SUCCESS' 
-            //         }
-            //     }
-            //     agent {
-            //         node {
-            //             label 'mac-mini1'
-            //             customWorkspace "workspace/test_dev"
-            //         }
-            //     }
-            //     steps {
-            //         sh '''
-            //         git add config.gradle
-            //         git commit -m "Increase versionCode automatically."
-            //         if ! [[ $(git remote | grep Bitbucket) ]]
-            //         then
-            //             git remote add Bitbucket ssh://git@git.hellotalk8.com:7999/android/ht_android.git
-            //         fi
-            //         git pull Bitbucket $(git branch | awk '{print $2}')
-            //         git push --set-upstream Bitbucket $(git branch | awk '{print $2}')
-            //         '''
-            //     }
-            // }
+            stage("Git commit") {
+                when {
+                    expression {
+                        currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+                    }
+                }
+                agent {
+                    node {
+                        label 'mac-mini1'
+                        customWorkspace "workspace/test_dev"
+                    }
+                }
+                steps {
+                    sh '''
+                    git add config.gradle
+                    git commit -m "Increase versionCode automatically."
+                    if ! [[ $(git remote | grep Bitbucket) ]]
+                    then
+                        git remote add Bitbucket ssh://git@git.hellotalk8.com:7999/android/ht_android.git
+                    fi
+                    git pull Bitbucket $(git branch | awk '{print $2}')
+                    git push --set-upstream Bitbucket $(git branch | awk '{print $2}')
+                    '''
+                }
+            }
         }
         post {
             failure {
