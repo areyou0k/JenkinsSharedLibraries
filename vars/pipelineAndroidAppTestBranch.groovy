@@ -172,7 +172,7 @@ def call(Closure body={}) {
                     // sh '''
                     // ./gradlew assembleGoogleRelease
                     // '''
-                    sh './gradlew -v'
+                    //sh './gradlew -v'
                     sh '''
                     curl -s 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
                         -H 'Content-Type: application/json' \
