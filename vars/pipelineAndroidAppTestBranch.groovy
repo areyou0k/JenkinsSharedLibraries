@@ -33,7 +33,7 @@ def call(Closure body={}) {
             stage('Check Branch/Tag') {
                 agent {
                     node {
-                        label 'master'
+                        label 'mac-mini1'
                         customWorkspace "workspace/test_dev"
                     }
                 }
@@ -53,7 +53,7 @@ def call(Closure body={}) {
             stage('Checkout SCM') {
                 agent {
                     node {
-                        label 'master'
+                        label 'mac-mini1'
                         customWorkspace "workspace/test_dev"
                     }
                 }
@@ -71,7 +71,7 @@ def call(Closure body={}) {
             stage('Unit Testing') {
                 agent {
                     node {
-                        label 'master'
+                        label 'mac-mini1'
                         customWorkspace "workspace/test_dev"
                     }
                 }
@@ -92,7 +92,7 @@ def call(Closure body={}) {
             stage("Incerease version code") {
                 agent {
                     node {
-                        label 'master'
+                        label 'mac-mini1'
                         customWorkspace "workspace/test_dev"
                     }
                 }
@@ -123,7 +123,7 @@ def call(Closure body={}) {
             stage('Build China') {
                 agent {
                     node {
-                        label 'master'
+                        label 'mac-mini1'
                         customWorkspace "workspace/test_dev"
                     }
                 }
@@ -157,7 +157,7 @@ def call(Closure body={}) {
             stage('Build Google') {
                 agent {
                     node {
-                        label 'master'
+                        label 'mac-mini1'
                         customWorkspace "workspace/test_dev"
                     }
                 }
@@ -188,7 +188,7 @@ def call(Closure body={}) {
             stage('UPload') {
                 agent {
                     node {
-                        label 'master'
+                        label 'mac-mini1'
                         customWorkspace "workspace/test_dev"
                     }
                 }
@@ -206,7 +206,7 @@ def call(Closure body={}) {
             stage("Git commit") {
                 agent {
                     node {
-                        label 'master'
+                        label 'mac-mini1'
                         customWorkspace "workspace/test_dev"
                     }
                 }
