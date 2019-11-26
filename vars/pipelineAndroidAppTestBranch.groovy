@@ -13,7 +13,7 @@ def call(Closure body={}) {
         options {
             timeout(time: 1, unit: 'HOURS')
             skipDefaultCheckout()
-            #ansiColor('xterm')
+            //ansiColor('xterm')
             retry(3)
         }
 
