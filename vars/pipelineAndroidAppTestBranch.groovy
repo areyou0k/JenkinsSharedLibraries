@@ -204,15 +204,15 @@ def call(Closure body={}) {
             }
 
             stage("Git commit") {
-                when {
-                    expression {
-                        currentBuild.result == null || currentBuild.result == 'SUCCESS' 
-                    }
-                }
                 agent {
                     node {
                         label 'mac-mini1'
                         customWorkspace "workspace/test_dev"
+                    }
+                }
+                when {
+                    expression {
+                        currentBuild.result == null || currentBuild.result == 'SUCCESS' 
                     }
                 }
                 steps {
