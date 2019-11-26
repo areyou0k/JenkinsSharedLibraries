@@ -6,8 +6,8 @@ library(
     retriever: modernSCM(
         [
             $class: 'GitSCMSource',
-            credentialsId: '846a4a04-da8e-4909-a5ff-eef9004b1eef',
-            id: '1be36020-7d8e-40a0-99dc-113f2b036c28',
+            credentialsId: 'archon-github',
+            id: 'archon-github',
             remote: 'git@github.com:BruceLEO1969/JenkinsSharedLibraries.git',
             traits: [
                 [
