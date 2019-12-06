@@ -14,12 +14,12 @@ def call(Closure body={}) {
             timeout(time: 1, unit: 'HOURS')
             skipDefaultCheckout()
             ansiColor('xterm')
-            retry(3)
+            // retry(3)
         }
 
-        triggers {
-            pollSCM('H/2 * * * *')
-        }
+        //triggers {
+        //    pollSCM('H/2 * * * *')
+        //}
 
         environment {
             LANG = "C.UTF-8"
@@ -30,25 +30,25 @@ def call(Closure body={}) {
         }
 
         stages {
-            stage('Check Branch/Tag') {
-                agent {
-                    node {
-                        label 'mac-mini1'
-                        customWorkspace "workspace/test_dev"
-                    }
-                }
-                when {
-                    beforeAgent true
-                    not {
-                        anyOf {
-                            branch "test/*"
-                        }
-                    }
-                }
-                steps {
-                    error "Don't know what to do with this branch or tag: ${env.BRANCH_NAME}"
-                }
-            }
+            // stage('Check Branch/Tag') {
+            //     agent {
+            //         node {
+            //             label 'mac-mini1'
+            //             customWorkspace "workspace/test_dev"
+            //         }
+            //     }
+            //     when {
+            //         beforeAgent true
+            //         not {
+            //             anyOf {
+            //                 branch "test/*"
+            //             }
+            //         }
+            //     }
+            //     steps {
+            //         error "Don't know what to do with this branch or tag: ${env.BRANCH_NAME}"
+            //     }
+            // }
 
             stage('Checkout SCM') {
                 agent {
@@ -68,26 +68,26 @@ def call(Closure body={}) {
                 }
             }
 
-            stage('Unit Testing') {
-                agent {
-                    node {
-                        label 'mac-mini1'
-                        customWorkspace "workspace/test_dev"
-                    }
-                }
-                environment {
-                    ANDROID_SDK_ROOT = "${HOME}/Library/Android/sdk"
-                    ANDROID_HOME = "${ANDROID_SDK_ROOT}"
-                }
-                when {
-                    beforeAgent true
-                    environment name: 'UNITTESTING_STATE', value: 'true'
-                }
-                steps {
-                    // unittestTestBranch(buildTypes, productFlavors)
-                    echo 'pass'
-                }
-            }
+            // stage('Unit Testing') {
+            //     agent {
+            //         node {
+            //             label 'mac-mini1'
+            //             customWorkspace "workspace/test_dev"
+            //         }
+            //     }
+            //     environment {
+            //         ANDROID_SDK_ROOT = "${HOME}/Library/Android/sdk"
+            //         ANDROID_HOME = "${ANDROID_SDK_ROOT}"
+            //     }
+            //     when {
+            //         beforeAgent true
+            //         environment name: 'UNITTESTING_STATE', value: 'true'
+            //     }
+            //     steps {
+            //         // unittestTestBranch(buildTypes, productFlavors)
+            //         echo 'pass'
+            //     }
+            // }
 
             stage("Incerease version code") {
                 agent {
