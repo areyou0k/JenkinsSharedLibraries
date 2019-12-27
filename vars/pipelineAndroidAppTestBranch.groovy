@@ -184,7 +184,7 @@ def call(Closure body={}) {
             //     }
             // }
 
-            stage('UPload') {
+            stage('Compile and upload') {
                 agent {
                     node {
                         label 'mac-mini1'
