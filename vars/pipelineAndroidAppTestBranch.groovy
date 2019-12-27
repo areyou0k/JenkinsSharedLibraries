@@ -120,70 +120,69 @@ def call(Closure body={}) {
                 }
             }
 
-            stage('Build China') {
-                agent {
-                    node {
-                        label 'mac-mini1'
-                        customWorkspace "workspace/test_dev"
-                    }
-                }
-                environment {
-                    ANDROID_SDK_ROOT = "${HOME}/Library/Android/sdk"
-                    //ANDROID_SDK_ROOT = "/usr/local/Caskroom/android-sdk/4333796"
-                    ANDROID_HOME = "${ANDROID_SDK_ROOT}"
-                    PATH = "/Users/mac/.rbenv/shims:/usr/local/bin:${PATH}"
-                }
-                steps {
+            // stage('Build China') {
+            //     agent {
+            //         node {
+            //             label 'mac-mini1'
+            //             customWorkspace "workspace/test_dev"
+            //         }
+            //     }
+            //     environment {
+            //         ANDROID_SDK_ROOT = "${HOME}/Library/Android/sdk"
+            //         //ANDROID_SDK_ROOT = "/usr/local/Caskroom/android-sdk/4333796"
+            //         ANDROID_HOME = "${ANDROID_SDK_ROOT}"
+            //         PATH = "/Users/mac/.rbenv/shims:/usr/local/bin:${PATH}"
+            //     }
+            //     steps {
+            //         sh '''
+            //         ./gradlew -v
+            //         ./gradlew clean 
+            //         ./gradlew assembleChinaRelease
+            //         '''
+            //         sh '''
+            //         curl -s 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
+            //             -H 'Content-Type: application/json' \
+            //             -d '
+            //                 {
+            //                     "msgtype": "markdown",
+            //                     "markdown": {
+            //                         "content": "Gradle task for China **success**.."
+            //                     }
+            //                 }'
+            //         '''
+            //     }
+            // }
 
-                    sh '''
-                    ./gradlew -v
-                    ./gradlew clean 
-                    ./gradlew assembleChinaRelease
-                    '''
-                    sh '''
-                    curl -s 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
-                        -H 'Content-Type: application/json' \
-                        -d '
-                            {
-                                "msgtype": "markdown",
-                                "markdown": {
-                                    "content": "Gradle task for China **success**.."
-                                }
-                            }'
-                    '''
-                }
-            }
-
-            stage('Build Google') {
-                agent {
-                    node {
-                        label 'mac-mini1'
-                        customWorkspace "workspace/test_dev"
-                    }
-                }
-                environment {
-                    ANDROID_SDK_ROOT = "${HOME}/Library/Android/sdk"
-                    //ANDROID_SDK_ROOT = "/usr/local/Caskroom/android-sdk/4333796"
-                    ANDROID_HOME = "${ANDROID_SDK_ROOT}"
-                    PATH = "/Users/mac/.rbenv/shims:/usr/local/bin:${PATH}"
-                }
-                steps {
-                    sh '''
-                    ./gradlew assembleGoogleRelease
-                    '''
-                    sh '''
-                    curl -s 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
-                        -H 'Content-Type: application/json' \
-                        -d '
-                            {
-                                "msgtype": "markdown",
-                                "markdown": {
-                                    "content": "Gradle task for Google **success**."
-                                }
-                            }'
-                    '''
-                }
-            }
+            // stage('Build Google') {
+            //     agent {
+            //         node {
+            //             label 'mac-mini1'
+            //             customWorkspace "workspace/test_dev"
+            //         }
+            //     }
+            //     environment {
+            //         ANDROID_SDK_ROOT = "${HOME}/Library/Android/sdk"
+            //         //ANDROID_SDK_ROOT = "/usr/local/Caskroom/android-sdk/4333796"
+            //         ANDROID_HOME = "${ANDROID_SDK_ROOT}"
+            //         PATH = "/Users/mac/.rbenv/shims:/usr/local/bin:${PATH}"
+            //     }
+            //     steps {
+            //         sh '''
+            //         ./gradlew assembleGoogleRelease
+            //         '''
+            //         sh '''
+            //         curl -s 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
+            //             -H 'Content-Type: application/json' \
+            //             -d '
+            //                 {
+            //                     "msgtype": "markdown",
+            //                     "markdown": {
+            //                         "content": "Gradle task for Google **success**."
+            //                     }
+            //                 }'
+            //         '''
+            //     }
+            // }
 
             stage('UPload') {
                 agent {
@@ -266,9 +265,9 @@ def buildTestBranch() {
     sh 'bundle exec fastlane android do_publish_all'
 }
 
-def wechatAll() {
-    sh 'bundle exec fastlane android do_wechat_all'
-}
+// def wechatAll() {
+//     sh 'bundle exec fastlane android do_wechat_all'
+// }
 
 def artifactsTestBranch(String buildTypes = '', String productFlavors = '') {
     echo "Test branch - Artifacts"
