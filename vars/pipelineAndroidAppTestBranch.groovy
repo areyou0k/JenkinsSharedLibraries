@@ -260,8 +260,8 @@ def buildTestBranch() {
     // productFlavors = pipelineAndroidAppSetup.changeStringGradleStyle(productFlavors)
     // def args = ((productFlavors ?: '') + (buildTypes ?: '')) //+ " publish"
     // pipelineAndroidAppSetup.build(args)
-    // sh 'bundle install'
-    // sh 'bundle update'
+    sh 'bundle install'
+    sh 'bundle update'
     sh 'bundle exec fastlane android do_publish_all'
 }
 
