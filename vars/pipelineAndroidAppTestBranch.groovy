@@ -1,5 +1,3 @@
-#!/usr/bin/env groovy
-
 def call(Closure body={}) {
     // evaluate the body block, and collect configuration into the object
     def pipelineParams= [:]
@@ -8,7 +6,7 @@ def call(Closure body={}) {
     body()
 
     pipeline {
-        agent none
+        agent any
 
         options {
             timeout(time: 1, unit: 'HOURS')
@@ -51,14 +49,14 @@ def call(Closure body={}) {
             // }
 
             stage('Checkout SCM') {
-                agent {
-                    node {
-                        label 'mac-mini1'
-                        customWorkspace "workspace/test_dev"
-                    }
-                }
+                //agent {
+                //    node {
+                //        label 'mac-mini1'
+                //        customWorkspace "workspace/test_dev"
+                //    }
+                //}
                 when {
-                    beforeAgent true
+                    //beforeAgent true
                     branch "test/*"
                 }
                 steps {
@@ -90,12 +88,13 @@ def call(Closure body={}) {
             // }
 
             stage("Incerease version code") {
-                agent {
-                    node {
-                        label 'mac-mini1'
-                        customWorkspace "workspace/test_dev"
-                    }
-                }
+                //agent {
+                //    node {
+                //        label 'mac-mini1'
+                //        customWorkspace "workspace/test_dev"
+                //    }
+               // }
+                customWorkspace "workspace/test_dev"
                 environment {
                     ANDROID_SDK_ROOT = "${HOME}/Library/Android/sdk"
                     //ANDROID_SDK_ROOT = "/usr/local/Caskroom/android-sdk/4333796"
@@ -103,17 +102,18 @@ def call(Closure body={}) {
                     PATH = "/Users/mac/.rbenv/shims:/usr/local/bin:${PATH}"
                 }
                 steps {
-                    sh '''
-                    curl -s 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
-                        -H 'Content-Type: application/json' \
-                        -d '
-                            {
-                                "msgtype": "markdown",
-                                "markdown": {
-                                    "content": "**A new build start...**"
-                                }
-                            }'
-                    '''
+					// 注释掉 不发送微信通知（测试时候）
+                    //sh '''
+                    //curl -s 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
+                    //    -H 'Content-Type: application/json' \
+                    //    -d '
+                    //        {
+                    //            "msgtype": "markdown",
+                    //            "markdown": {
+                    //                "content": "**A new build start...**"
+                    //            }
+                    //        }'
+                    //'''
                     sh '''
                     export version_code=$(awk '/versionCode/ {print $NF}' config.gradle | cut -d ',' -f 1); sed  -i'' -e "s/versionCode      : ${version_code}/versionCode      : $[${version_code}+1]/g" config.gradle
                     '''
@@ -203,12 +203,13 @@ def call(Closure body={}) {
             }
 
             stage("Git commit") {
-                agent {
-                    node {
-                        label 'mac-mini1'
-                        customWorkspace "workspace/test_dev"
-                    }
-                }
+               // agent {
+               //     node {
+               //         label 'mac-mini1'
+               //         customWorkspace "workspace/test_dev"
+               //     }
+               // }
+               customWorkspace "workspace/test_dev"
                 when {
                     expression {
                         currentBuild.result == null || currentBuild.result == 'SUCCESS' 
@@ -228,21 +229,22 @@ def call(Closure body={}) {
                 }
             }
         }
-        post {
-            failure {
-                sh '''
-                curl -s 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
-                    -H 'Content-Type: application/json' \
-                    -d '
-                        {
-                            "msgtype": "markdown",
-                            "markdown": {
-                                "content": "Jenkins task **failed**..."
-                            }
-                        }'
-                '''
-            }
-        }
+         // 测试时不发送通知
+        //post {
+        //    failure {
+        //        sh '''
+        //        curl -s 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
+        //            -H 'Content-Type: application/json' \
+        //            -d '
+        //                {
+        //                    "msgtype": "markdown",
+        //                    "markdown": {
+        //                        "content": "Jenkins task **failed**..."
+        //                    }
+        //                }'
+        //        '''
+        //    }
+        //}
     }
 }
 
