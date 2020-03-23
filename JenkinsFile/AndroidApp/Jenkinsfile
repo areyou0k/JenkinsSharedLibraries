@@ -6,7 +6,7 @@ library(
     retriever: modernSCM(
         [
             $class: 'GitSCMSource',
-            credentialsId: '	66417514-8043-45e2-8d7a-40f401ed557a',
+            credentialsId: '66417514-8043-45e2-8d7a-40f401ed557a',
             id: '66417514-8043-45e2-8d7a-40f401ed557a',
             remote: 'git@github.com:malageji/JenkinsSharedLibraries.git',
             traits: [
