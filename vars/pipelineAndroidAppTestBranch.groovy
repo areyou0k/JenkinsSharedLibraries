@@ -53,18 +53,17 @@ def call(Closure body={}) {
                     PATH = "/Users/mac/.rbenv/shims:/usr/local/bin:${PATH}"
                 }
                 steps {
-                    //测试时注释，不发送通知！
-                    //sh '''
-                    //curl -s 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
-                    //    -H 'Content-Type: application/json' \
-                    //    -d '
-                    //        {
-                    //            "msgtype": "markdown",
-                    //            "markdown": {
-                    //                "content": "**A new build start...**"
-                    //            }
-                    //        }'
-                    //'''
+                    sh '''
+                    curl -s 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
+                        -H 'Content-Type: application/json' \
+                        -d '
+                            {
+                                "msgtype": "markdown",
+                                "markdown": {
+                                    "content": "**A new build start...**"
+                                }
+                            }'
+                    '''
                     sh '''
                     export version_code=$(awk '/versionCode/ {print $NF}' config.gradle | cut -d ',' -f 1); sed  -i'' -e "s/versionCode      : ${version_code}/versionCode      : $[${version_code}+1]/g" config.gradle
                     '''
@@ -167,21 +166,21 @@ def call(Closure body={}) {
                 }
             }
         }
-        // 测试时注释掉 post {
-        //    failure {
-        //        sh '''
-        //        curl -s 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
-        //            -H 'Content-Type: application/json' \
-        //            -d '
-        //                {
-        //                    "msgtype": "markdown",
-        //                    "markdown": {
-        //                        "content": "Jenkins task **failed**..."
-        //                    }
-        //                }'
-        //        '''
-        //    }
-        //}
+        post {
+            failure {
+                sh '''
+                curl -s 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=e87d05fe-5255-4629-b448-5270f497cba2' \
+                    -H 'Content-Type: application/json' \
+                    -d '
+                        {
+                            "msgtype": "markdown",
+                            "markdown": {
+                                "content": "Jenkins task **failed**..."
+                            }
+                        }'
+                '''
+            }
+        }
     }
 }
 
