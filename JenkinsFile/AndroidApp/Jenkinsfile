@@ -1,13 +1,13 @@
 #!/usr/bin/env groovy
 
 library(
-    identifier: 'github.com:BruceLEO1969/JenkinsSharedLibraries@master',
+    identifier: 'github.com:malageji/JenkinsSharedLibraries@master',
     changelog: false,
     retriever: modernSCM(
         [
             $class: 'GitSCMSource',
-            credentialsId: 'archon-github',
-            id: 'archon-github',
+            credentialsId: '	66417514-8043-45e2-8d7a-40f401ed557a',
+            id: '66417514-8043-45e2-8d7a-40f401ed557a',
             remote: 'git@github.com:malageji/JenkinsSharedLibraries.git',
             traits: [
                 [
