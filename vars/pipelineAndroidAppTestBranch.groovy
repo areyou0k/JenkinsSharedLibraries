@@ -51,12 +51,7 @@ def call(Closure body={}) {
             // }
 
             stage('Checkout SCM') {
-                agent {
-                    node {
-                        label 'mac-mini1'
-                        customWorkspace "workspace/test_dev"
-                    }
-                }
+                agent none
                 when {
                     beforeAgent true
                     branch "test/*"
@@ -90,12 +85,7 @@ def call(Closure body={}) {
             // }
 
             stage("Incerease version code") {
-                agent {
-                    node {
-                        label 'mac-mini1'
-                        customWorkspace "workspace/test_dev"
-                    }
-                }
+                agent none
                 environment {
                     ANDROID_SDK_ROOT = "${HOME}/Library/Android/sdk"
                     //ANDROID_SDK_ROOT = "/usr/local/Caskroom/android-sdk/4333796"
@@ -185,12 +175,7 @@ def call(Closure body={}) {
             // }
 
             stage('Compile and upload') {
-                agent {
-                    node {
-                        label 'mac-mini1'
-                        customWorkspace "workspace/test_dev"
-                    }
-                }
+                agent none
                 environment {
                     ANDROID_SDK_ROOT = "${HOME}/Library/Android/sdk"
                     //ANDROID_SDK_ROOT = "/usr/local/Caskroom/android-sdk/4333796"
@@ -203,12 +188,7 @@ def call(Closure body={}) {
             }
 
             stage("Git commit") {
-                agent {
-                    node {
-                        label 'mac-mini1'
-                        customWorkspace "workspace/test_dev"
-                    }
-                }
+                agent none
                 when {
                     expression {
                         currentBuild.result == null || currentBuild.result == 'SUCCESS' 
