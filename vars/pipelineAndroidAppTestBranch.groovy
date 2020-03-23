@@ -65,7 +65,7 @@ def call(Closure body={}) {
                     //            }
                     //        }'
                     //'''
-                    //sh '''
+                    sh '''
                     export version_code=$(awk '/versionCode/ {print $NF}' config.gradle | cut -d ',' -f 1); sed  -i'' -e "s/versionCode      : ${version_code}/versionCode      : $[${version_code}+1]/g" config.gradle
                     '''
                 }
