@@ -8,7 +8,7 @@ library(
             $class: 'GitSCMSource',
             credentialsId: 'archon-github',
             id: 'archon-github',
-            remote: 'git@github.com:BruceLEO1969/JenkinsSharedLibraries.git',
+            remote: 'git@github.com:malageji/JenkinsSharedLibraries.git',
             traits: [
                 [
                     $class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait'
