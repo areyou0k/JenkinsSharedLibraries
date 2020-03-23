@@ -8,7 +8,7 @@ def call(Closure body={}) {
     body()
 
     pipeline {
-        agent none
+        agent any
 
         options {
             timeout(time: 1, unit: 'HOURS')
