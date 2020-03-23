@@ -52,8 +52,9 @@ def call(Closure body={}) {
 
             stage('Checkout SCM') {
                 agent none
+                
                 when {
-                    beforeAgent true
+                    //beforeAgent true
                     branch "test/*"
                 }
                 steps {
