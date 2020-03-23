@@ -50,9 +50,7 @@ def call(Closure body={}) {
             //     }
             // }
 
-            stage('Checkout SCM') {
-                agent none
-                
+            stage('Checkout SCM') {       
                 when {
                     //beforeAgent true
                     branch "test/*"
@@ -86,7 +84,6 @@ def call(Closure body={}) {
             // }
 
             stage("Incerease version code") {
-                agent none
                 environment {
                     ANDROID_SDK_ROOT = "${HOME}/Library/Android/sdk"
                     //ANDROID_SDK_ROOT = "/usr/local/Caskroom/android-sdk/4333796"
@@ -176,7 +173,6 @@ def call(Closure body={}) {
             // }
 
             stage('Compile and upload') {
-                agent none
                 environment {
                     ANDROID_SDK_ROOT = "${HOME}/Library/Android/sdk"
                     //ANDROID_SDK_ROOT = "/usr/local/Caskroom/android-sdk/4333796"
@@ -189,7 +185,6 @@ def call(Closure body={}) {
             }
 
             stage("Git commit") {
-                agent none
                 when {
                     expression {
                         currentBuild.result == null || currentBuild.result == 'SUCCESS' 
