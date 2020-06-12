@@ -40,6 +40,7 @@ def call(Closure body={}) {
                 }
                 steps {
                     script {
+                        timeout(time: 1, unit: 'HOURS')
                         def scmVars = checkoutGitlab()
                     }
                 }
