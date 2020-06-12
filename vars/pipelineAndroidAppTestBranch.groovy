@@ -9,9 +9,9 @@ def call(Closure body={}) {
 
     pipeline {
         agent {
-         node {
-             agent any
-             customWorkspace "workspace/test_dev"
+             node {
+                agent none
+                customWorkspace "workspace/test_dev"
             }
         }
         
