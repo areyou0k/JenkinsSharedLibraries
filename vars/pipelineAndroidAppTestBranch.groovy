@@ -7,16 +7,8 @@ def call(Closure body={}) {
     body.delegate = pipelineParams
     body()
 
-    pipeline {
-        agent {
-             node {
-                agent none
-                customWorkspace "workspace/test_dev"
-            }
-        }
-        
-        //agent any
-
+    pipeline {  
+        agent any
         options {
             timeout(time: 1, unit: 'HOURS')
             skipDefaultCheckout()
