@@ -8,7 +8,12 @@ def call(Closure body={}) {
     body()
 
     pipeline {  
-        agent any
+       agent {
+       node {
+            label "master"
+            customWorkspace "workspace/test_dev"
+            }
+        }
         options {
             timeout(time: 1, unit: 'HOURS')
             skipDefaultCheckout()
