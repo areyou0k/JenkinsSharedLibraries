@@ -8,8 +8,14 @@ def call(Closure body={}) {
     body()
 
     pipeline {
-        agent any
+        agent {
+         node {
+             agent any
+             customWorkspace "workspace/test_dev"
+            }
+        }
         
+        //agent any
 
         options {
             timeout(time: 1, unit: 'HOURS')
