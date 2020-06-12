@@ -15,7 +15,7 @@ def call(Closure body={}) {
             timeout(time: 1, unit: 'HOURS')
             skipDefaultCheckout()
             ansiColor('xterm')
-            customWorkspace "workspace/test_dev"
+            
             // retry(3)
         }
 
@@ -35,7 +35,7 @@ def call(Closure body={}) {
        
 
             stage('Checkout SCM') {   
-                timeout(time: 1,unit: 'HOURS')
+                
                 when {
                     //beforeAgent true
                     branch "test/*"
