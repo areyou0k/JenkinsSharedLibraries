@@ -9,6 +9,7 @@ def call(Closure body={}) {
 
     pipeline {
         agent any
+        customWorkspace "workspace/test_dev"
 
         options {
             timeout(time: 1, unit: 'HOURS')
