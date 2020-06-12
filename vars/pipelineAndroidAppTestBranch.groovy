@@ -9,12 +9,13 @@ def call(Closure body={}) {
 
     pipeline {
         agent any
-        customWorkspace "workspace/test_dev"
+        
 
         options {
             timeout(time: 1, unit: 'HOURS')
             skipDefaultCheckout()
             ansiColor('xterm')
+            customWorkspace "workspace/test_dev"
             // retry(3)
         }
 
@@ -33,7 +34,8 @@ def call(Closure body={}) {
         stages {
        
 
-            stage('Checkout SCM') {       
+            stage('Checkout SCM') {   
+                timeout(time: 1,unit: 'HOURS')
                 when {
                     //beforeAgent true
                     branch "test/*"
